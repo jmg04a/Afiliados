@@ -16,8 +16,7 @@ namespace Proyecto1
 {
     public partial class frmMain : Form
     {
-        //List<string> columnas;
-        List<string> municipios = new List<string> { };
+        List<string> municipios = new List<string> {"TODOS"};
         DataTable dt = new DataTable();
         public frmMain()
         {
@@ -29,13 +28,18 @@ namespace Proyecto1
             dt.Columns.Add("Estatus");
         }
 
-        private void restablecer()
+        private void reiniciar()
         {
-            cmbbMunicipio.SelectedIndex = 0;
+            dt.Clear();
+            lbEstadoResultado.Text = string.Empty;
             dgvAfiliados.DataSource = null;
             dgvAfiliados.Rows.Clear();
-            cargarTabla();
-            tsslAfiliadosSeleccionadosResultado.Text=tsslAfiliadosResultado.Text;
+            tsslAfiliadosSeleccionadosResultado.Text = "NA";
+            tsslAfiliadosResultado.Text = "NA";
+            cmbbMunicipio.SelectedIndex = -1;
+            cmbbMunicipio.DataSource = null;
+            municipios = new List<string> { "TODOS" };
+            cmbbMunicipio.DataSource = municipios;
         }
 
         private void cargarTabla()
@@ -54,6 +58,7 @@ namespace Proyecto1
 
         private void cargarExcel()
         {
+            reiniciar();
             try
             {
                 if (ofdImportarExcel.ShowDialog() == DialogResult.OK)
@@ -74,7 +79,6 @@ namespace Proyecto1
 
                         ExcelWorksheet worksheet = package.Workbook.Worksheets.First();
 
-                        // Leer el número de filas y columnas con datos
                         int rowCount = worksheet.Dimension.Rows;
                         int colCount = worksheet.Dimension.Columns;
 
@@ -106,6 +110,7 @@ namespace Proyecto1
                             }
                         }
 
+                        cmbbMunicipio.DataSource = null;
                         cmbbMunicipio.DataSource = municipios;
 
                         cargarTabla();
@@ -146,7 +151,7 @@ namespace Proyecto1
 
         private void tsmReiniciar_Click(object sender, EventArgs e)
         {
-            restablecer();
+            reiniciar();
         }
 
         private void toolStripStatusLabel1_Click(object sender, EventArgs e)
@@ -181,19 +186,17 @@ namespace Proyecto1
 
         private void btnBuscarMunicipio_Click(object sender, EventArgs e)
         {
-            int contador = 0;
             dgvAfiliados.DataSource = null;
             dgvAfiliados.Rows.Clear();
 
-            for (int row = 0; row <= dt.Rows.Count - 1; row++)
+            if (cmbbMunicipio.SelectedIndex == 0)
             {
-                if (cmbbMunicipio.SelectedItem.ToString() == dt.Rows[row][2].ToString())
+                if (chkbFechaBuscar.Checked)
                 {
-                    if (chkbFechaBuscar.Checked) 
+                    for (int row = 0; row <= dt.Rows.Count - 1; row++)
                     {
-                        if (dtpFecha1.Value.Date < (DateTime)dt.Rows[row][3] && (DateTime)dt.Rows[row][3]<dtpFecha2.Value.Date)
+                        if (dtpFecha1.Value.Date < (DateTime)dt.Rows[row][3] && (DateTime)dt.Rows[row][3] < dtpFecha2.Value.Date)
                         {
-                            contador++;
                             dgvAfiliados.Rows.Add(
                             dt.Rows[row][0].ToString(),
                             dt.Rows[row][1].ToString(),
@@ -203,23 +206,55 @@ namespace Proyecto1
                             );
                         }
                     }
-                    else
+                    
+                }
+                else
+                {
+                    cargarTabla();
+                }
+                
+            }
+            else
+            {
+                for (int row = 0; row <= dt.Rows.Count - 1; row++)
+                {
+                    if (cmbbMunicipio.SelectedItem.ToString() == dt.Rows[row][2].ToString())
                     {
-                        contador++;
-                        dgvAfiliados.Rows.Add(
-                        dt.Rows[row][0].ToString(),
-                        dt.Rows[row][1].ToString(),
-                        dt.Rows[row][2].ToString(),
-                        dt.Rows[row][3].ToString(),
-                        dt.Rows[row][4].ToString()
-                        );
+                        if (chkbFechaBuscar.Checked)
+                        {
+                            if (dtpFecha1.Value.Date < (DateTime)dt.Rows[row][3] && (DateTime)dt.Rows[row][3] < dtpFecha2.Value.Date)
+                            {
+                                dgvAfiliados.Rows.Add(
+                                dt.Rows[row][0].ToString(),
+                                dt.Rows[row][1].ToString(),
+                                dt.Rows[row][2].ToString(),
+                                dt.Rows[row][3].ToString(),
+                                dt.Rows[row][4].ToString()
+                                );
+                            }
+                        }
+                        else
+                        {
+                            dgvAfiliados.Rows.Add(
+                            dt.Rows[row][0].ToString(),
+                            dt.Rows[row][1].ToString(),
+                            dt.Rows[row][2].ToString(),
+                            dt.Rows[row][3].ToString(),
+                            dt.Rows[row][4].ToString()
+                            );
+                        }
                     }
                 }
             }
-            tsslAfiliadosSeleccionadosResultado.Text =  (contador).ToString();
+            tsslAfiliadosSeleccionadosResultado.Text = (dgvAfiliados.Rows.Count-1).ToString();
         }
 
         private void chkbFechaBuscar_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dtpFecha1_ValueChanged(object sender, EventArgs e)
         {
 
         }

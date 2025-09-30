@@ -48,12 +48,12 @@
             this.chkbFechaBuscar = new System.Windows.Forms.CheckBox();
             this.tsslAfiliadosResultado = new System.Windows.Forms.ToolStripStatusLabel();
             this.ssInformacion = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslAfiliadosSeleccionadosResultado = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.btnBuscarMunicipio = new System.Windows.Forms.Button();
             this.lbEstadoResultado = new System.Windows.Forms.Label();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAfiliados)).BeginInit();
             this.msOpciones.SuspendLayout();
             this.ssInformacion.SuspendLayout();
@@ -84,8 +84,6 @@
             this.cmbbMunicipio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbbMunicipio.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbbMunicipio.FormattingEnabled = true;
-            this.cmbbMunicipio.Items.AddRange(new object[] {
-            ""});
             this.cmbbMunicipio.Location = new System.Drawing.Point(219, 132);
             this.cmbbMunicipio.Name = "cmbbMunicipio";
             this.cmbbMunicipio.Size = new System.Drawing.Size(366, 33);
@@ -190,6 +188,7 @@
             this.dtpFecha2.Name = "dtpFecha2";
             this.dtpFecha2.Size = new System.Drawing.Size(348, 30);
             this.dtpFecha2.TabIndex = 21;
+            this.dtpFecha2.Value = new System.DateTime(2020, 1, 1, 0, 0, 0, 0);
             // 
             // dtpFecha1
             // 
@@ -198,6 +197,8 @@
             this.dtpFecha1.Name = "dtpFecha1";
             this.dtpFecha1.Size = new System.Drawing.Size(348, 30);
             this.dtpFecha1.TabIndex = 20;
+            this.dtpFecha1.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.dtpFecha1.ValueChanged += new System.EventHandler(this.dtpFecha1_ValueChanged);
             // 
             // lbFecha2
             // 
@@ -253,16 +254,28 @@
             this.ssInformacion.TabIndex = 16;
             this.ssInformacion.Text = "statusStrip1";
             // 
-            // toolStripStatusLabel2
+            // toolStripStatusLabel3
             // 
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(0, 25);
+            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(235, 25);
+            this.toolStripStatusLabel3.Text = "Numero de afiliados totales:";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(292, 25);
+            this.toolStripStatusLabel1.Text = "Numero de afiliados seleccionados:";
             // 
             // tsslAfiliadosSeleccionadosResultado
             // 
             this.tsslAfiliadosSeleccionadosResultado.Name = "tsslAfiliadosSeleccionadosResultado";
             this.tsslAfiliadosSeleccionadosResultado.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tsslAfiliadosSeleccionadosResultado.Size = new System.Drawing.Size(0, 25);
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(0, 25);
             // 
             // btnBuscarMunicipio
             // 
@@ -283,18 +296,6 @@
             this.lbEstadoResultado.Name = "lbEstadoResultado";
             this.lbEstadoResultado.Size = new System.Drawing.Size(0, 25);
             this.lbEstadoResultado.TabIndex = 23;
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(292, 25);
-            this.toolStripStatusLabel1.Text = "Numero de afiliados seleccionados:";
-            // 
-            // toolStripStatusLabel3
-            // 
-            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(235, 25);
-            this.toolStripStatusLabel3.Text = "Numero de afiliados totales:";
             // 
             // frmMain
             // 
